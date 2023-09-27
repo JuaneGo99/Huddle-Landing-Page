@@ -1,0 +1,143 @@
+@use 'variables';
+
+@mixin reset{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+@mixin desktop-view ($width, $height: unset, $font-size: unset) {
+    @media (min-width: 1200px) {
+        width: $width;
+        height: $height;
+        font-size: $font-size;
+    }
+}
+
+@mixin button ($bg-color, $br-color, $fn-color, $width, $height, $center) {
+    background-color: $bg-color;
+    color: $fn-color;
+    border: none;
+    border: 1px solid $br-color;
+    width: $width;
+    height: $height;
+    border-radius: 50px;
+    display: block;
+    @if  $center == true{
+        margin: 0 auto;
+    }
+}
+
+@mixin button-hover($bg-color){
+    &:hover{
+        cursor: pointer;
+        background-color: $bg-color;
+        color: variables.$White;
+    }
+}
+
+@mixin stats ($logo){
+    margin-bottom: 95px;
+    &__logo{
+        width: $logo;
+    }
+    &__stats{
+        font-size: 4em;
+        margin: 0 0 10px;
+    }
+    &__description{
+        color: variables.$Very-Dark-Cyan;
+        opacity: 0.5;
+        font-size: 0.9em;
+        text-align: center;
+        margin: 0;
+        @content
+    }
+};
+
+@mixin stats-desktop ($logo){
+    @media (min-width:1200px){
+        &__logo{
+            width: $logo;
+        }
+        &__stats{
+            font-size: 6em;
+        }
+        &__description{
+            font-size: 1.5em;
+            @content
+        }
+    };
+}
+
+@mixin section-stats-desktop{
+    @media (min-width:1200px){
+        flex-direction: row;
+        justify-content: space-around;
+        height: 700px;
+    }
+}
+
+@mixin flexSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 150px 0;
+    .image-container__illustration{
+        width: 246px;
+        margin-bottom: 78px;
+    }
+    .description{
+        &__title{
+            font-family: variables.$Headings-font;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        &__content{
+            text-align: center;
+            font-size: 0.9em;
+            width: 330px;
+        }
+    }
+}
+
+@mixin flexSection-desktop($direction: row){
+    @media (min-width:1200px){
+        flex-direction: row;
+        justify-content: space-around;
+        flex-direction: $direction;
+        height: 500px;
+        .image-container__illustration{
+            width: 527px;
+        }
+        .description{
+            &__title{
+                font-size: 2.3em;
+                text-align: left;
+            }
+            &__content{
+                font-size: 1em;
+                text-align: left;
+            }
+        }
+    }
+}
+
+@mixin banner($url-top, $url-bottom){
+    background: {
+        image: url($url-top), url($url-bottom);
+        repeat: no-repeat, no-repeat;
+        position-y: top, bottom; 
+    };
+}
+
+@mixin banner-desktop($url-top, $url-bottom){
+    @media (min-width:1200px){
+        background: {
+            image: url($url-top), url($url-bottom);
+        };
+    }
+}
